@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  /* Light palette */
+  --background: #ffffff;
+  --foreground: #0f172a; /* slate-900 */
+  /* Brand palette */
+  --brand: #0ea5e9; /* sky-500 */
+  --brand-600: #0284c7; /* sky-600 */
+  --brand-50: #e0f2fe; /* sky-100 */
+  --accent: #14b8a6; /* teal-500 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* We enforce dark mode regardless of prefers-color-scheme */
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom utilities for neon buttons and glass panels */
+.btn-glow {
+  @apply relative inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm sm:text-base font-semibold text-[#061018] bg-teal-300 hover:bg-teal-200 transition;
+}
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(49,204,255,0.9), rgba(138,125,255,0.7), rgba(16,233,185,0.85));
+  filter: blur(16px);
+  z-index: -1;
+}
+.btn-outline {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/20 text-white hover:bg-white/10 transition;
+  backdrop-filter: blur(6px);
+}
+
+.glass-panel {
+  @apply bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl shadow-[0_0_40px_rgba(0,255,255,0.08)];
+}
+
+.heading-3d {
+  text-shadow: 0 8px 24px rgba(55,215,255,0.35), 0 2px 10px rgba(138,125,255,0.25);
+}
+
+.section {
+  @apply py-20 md:py-28;
+}
+
+/* Aspect ratio utility fallback (if Tailwind aspect plugin isn't active) */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* Card primitives for consistent UI */
+.card {
+  @apply relative rounded-3xl border border-slate-200 bg-white shadow-md transition;
+}
+.card-hover {
+  @apply hover:shadow-lg hover:-translate-y-1;
+}
+.card-muted {
+  @apply border-slate-200;
+}
+.card-brand {
+  border-color: var(--brand-50);
+}
+.badge {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider;
+}
+.badge-brand {
+  background: var(--brand-600);
+  color: #fff;
+  border: 1px solid color-mix(in oklab, var(--brand-600), #000 10%);
+}
+.badge-muted {
+  @apply bg-slate-100 text-slate-600;
+}
+.gradient-ring {
+  position: absolute;
+  inset: -1px;
+  border-radius: 1.5rem;
+  pointer-events: none;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(2,132,199,0.15), rgba(59,130,246,0.1), rgba(16,185,129,0.15), rgba(2,132,199,0.15));
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.with-ring:hover .gradient-ring {
+  opacity: 1;
+}
+
+/* Display font (Montserrat) */
+.font-display {
+  font-family: var(--font-montserrat), var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+/* Light theme buttons */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg text-white px-5 py-3 text-sm font-semibold shadow transition;
+  background-color: var(--brand);
+}
+.btn-primary:hover {
+  background-color: var(--brand-600);
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition border;
+  border-color: var(--brand);
+  color: var(--brand-600);
+  background-color: transparent;
+}
+.btn-secondary:hover {
+  background-color: var(--brand-50);
+}
